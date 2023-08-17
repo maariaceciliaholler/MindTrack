@@ -2,6 +2,10 @@
 
 Este é um projeto de um sistema de gerenciamento de tarefas e notas, desenvolvido para a matéria de Desenvolvimento WEB. O sistema permite que os usuários criem, organizem e gerenciem suas tarefas, notas e lembretes de maneira eficiente.
 
+## Modelo Conceitual 
+
+![EntidadeMindTrack](https://github.com/maariaceciliaholler/MindTrack/assets/52547463/3781d9df-70aa-442d-9d82-327620d7bf8a)
+
 ## Requisitos Funcionais
 
 | ID | Descrição | Versão |
