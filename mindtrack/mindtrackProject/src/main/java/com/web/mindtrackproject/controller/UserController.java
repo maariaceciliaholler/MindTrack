@@ -28,12 +28,12 @@ public class UserController {
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/sign-in")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         System.out.println("RequestBody received: " + user);
 
         User createdUser = userService.createUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+        return ResponseEntity.status(200).body(createdUser);
     }
 
     @DeleteMapping("/{id}")
@@ -43,12 +43,14 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> loginUser(@RequestParam String email, @RequestParam String password) {
+    public ResponseEntity<User> loginUser(@RequestBody User user) throws Exception {
         try {
+            String email = user.getEmail();
+            String password = user.getPassword();
             User authenticatedUser = userService.loginUser(email, password);
             return ResponseEntity.ok(authenticatedUser);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw e;
         }
     }
 }

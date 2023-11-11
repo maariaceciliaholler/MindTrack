@@ -27,7 +27,6 @@ public class LabelService {
 
     public Label updateLabel(Long id, Label label) {
         if (labelRepository.existsById(id)) {
-            label.setId_label(id);
             return labelRepository.save(label);
         }
         return null;

@@ -16,17 +16,27 @@ import java.util.List;
 public class TrackListItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_trackListItem;
+    @Column(name = "id_track_list", nullable = false)
+    private Long idTrackList;
 
-    private String title_trackListItem;
+    @Column(name = "title_track_list", nullable = false)
+    private String titleTrackList;
 
-    private Date date_trackListItem;
+    @Column(name = "date_track_list", nullable = false)
+    private Date dateTrackList;
 
     @OneToMany(mappedBy = "trackListItem")
-    private List<ListItem> items_trackListItem;
+    private List<ListItem> itemsTrackList;
 
     @ManyToOne
-    @JoinColumn(name = "fk_id_user")
+    @JoinColumn(name = "fk_id_user", nullable = false)
     private User user;
 }
+
+
+
+
+
+
+
 

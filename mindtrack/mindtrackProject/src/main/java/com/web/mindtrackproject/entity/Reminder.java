@@ -15,11 +15,16 @@ import java.util.Date;
 public class Reminder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_reminder;
-    private Date date_reminder;
-    private String content_reminder;
+    @Column(name = "id_reminder", nullable = false)
+    private Long idReminder;
+
+    @Column(name = "date_reminder", nullable = false)
+    private Date dateReminder;
+
+    @Column(name = "content_reminder", nullable = false)
+    private String contentReminder;
 
     @ManyToOne
-    @JoinColumn(name = "fk_id_user")
+    @JoinColumn(name = "fk_id_user", nullable = false)
     private User user;
 }

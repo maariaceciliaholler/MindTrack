@@ -13,12 +13,14 @@ import lombok.NoArgsConstructor;
 public class Label {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_label;
+    @Column(name = "id_label", nullable = false)
+    private Long idLabel;
 
-    private String name_label;
+    @Column(name = "name_label", nullable = false)
+    private String nameLabel;
 
     @ManyToOne
-    @JoinColumn(name = "fk_id_user")
+    @JoinColumn(name = "fk_id_user", nullable = false)
     private User user;
 }
 

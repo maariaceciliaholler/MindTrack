@@ -27,7 +27,6 @@ public class ListItemService {
 
     public ListItem updateListItem(Long id, ListItem listItem) {
         if (listItemRepository.existsById(id)) {
-            listItem.setId_item(id);
             return listItemRepository.save(listItem);
         }
         return null;

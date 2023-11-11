@@ -27,7 +27,6 @@ public class ReminderService {
 
     public Reminder updateReminder(Long id, Reminder reminder) {
         if (reminderRepository.existsById(id)) {
-            reminder.setId_reminder(id);
             return reminderRepository.save(reminder);
         }
         return null;

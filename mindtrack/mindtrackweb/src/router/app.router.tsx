@@ -3,11 +3,12 @@ import LoginPage from "../features/user/auth/login/login.page";
 import HomePage from "../features/user/home.page"
 import { createBrowserRouter } from 'react-router-dom';
 import NotePage from "../features/note/create.note.page";
+import React from "react";
 
 
 const BASE_ROUTES = [
     {
-        path: '/',
+        path: '/login',
         element: <LoginPage />,
     },
     {
@@ -15,7 +16,7 @@ const BASE_ROUTES = [
         element: <RegisterPage />,
     },
     {
-        path: '/home',
+        path: '/home/:userId',
         element: <HomePage />,
     },
     {

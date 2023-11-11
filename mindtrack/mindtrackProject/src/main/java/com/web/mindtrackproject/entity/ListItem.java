@@ -12,11 +12,13 @@ import lombok.NoArgsConstructor;
 public class ListItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_item;
+    @Column(name = "id_item", nullable = false)
+    private Long idItem;
 
-    private String name_item;
+    @Column(name = "name_item", nullable = false)
+    private String nameItem;
 
     @ManyToOne
-    @JoinColumn(name = "fk_id_trackListItem")
+    @JoinColumn(name = "fk_id_track_list_item", nullable = false)
     private TrackListItem trackListItem;
 }

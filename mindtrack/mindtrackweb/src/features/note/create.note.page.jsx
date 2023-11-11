@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { FiEdit3, FiTrash2 } from 'react-icons/fi';
 
 function NotePage() {

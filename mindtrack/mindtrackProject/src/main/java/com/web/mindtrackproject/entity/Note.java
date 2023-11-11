@@ -15,16 +15,20 @@ import java.util.Date;
 public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_note;
+    @Column(name = "id_note", nullable = false)
+    private Long idNote;
 
-    private String title_note;
+    @Column(name = "title_note", nullable = false)
+    private String titleNote;
 
-    private String content_note;
+    @Column(name = "content_note", nullable = false)
+    private String contentNote;
 
-    private Date date_note;
+    @Column(name = "date_note", nullable = false)
+    private Date dateNote;
 
     @ManyToOne
-    @JoinColumn(name = "fk_id_user")
+    @JoinColumn(name = "fk_id_user", nullable = false)
     private User user;
 }
 

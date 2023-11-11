@@ -26,7 +26,6 @@ public class TrackListItemService {
 
     public TrackListItem updateTrackListItem(Long id, TrackListItem trackListItem) {
         if (trackListItemRepository.existsById(id)) {
-            trackListItem.setId_trackListItem(id);
             return trackListItemRepository.save(trackListItem);
         }
         return null;

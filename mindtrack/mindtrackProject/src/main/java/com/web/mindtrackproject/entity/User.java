@@ -15,36 +15,39 @@ import java.util.Date;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_user;
+    private Long id;
 
-    private String name_user;
+    @Column(name = "name_user", nullable = false, unique = false)
+    private String name;
 
-    private String email_user;
+    @Column(name = "email_user", nullable = false, unique = false)
+    private String email;
 
-    private String password_user;
+    @Column(name = "password_user", nullable = false, unique = false)
+    private String password;
 
     public String getName() {
-        return this.name_user;
+        return this.name;
     }
 
     public String getEmail() {
-        return this.email_user;
+        return this.email;
     }
 
     public String getPassword() {
-        return this.password_user;
+        return this.password;
     }
 
     public void setPassword(String password) {
-        this.password_user = password;
+        this.password = password;
     }
 
     public void setEmail(String email) {
-        this.email_user = email;
+        this.email = email;
     }
 
     public void setName(String name) {
-        this.name_user = name;
+        this.name = name;
     }
 }
 

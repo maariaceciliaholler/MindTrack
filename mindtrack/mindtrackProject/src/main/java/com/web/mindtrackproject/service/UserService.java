@@ -26,7 +26,8 @@ public class UserService {
     public User createUser(User user) {
         String encryptedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encryptedPassword);
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        return savedUser;
     }
 
     public void deleteUser(Long id) {
@@ -34,14 +35,12 @@ public class UserService {
     }
 
     public User loginUser(String email, String password) throws Exception {
-        //TODO fazer funcionar
-//        User user = userRepository.findByEmail(email);
-//
-//        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-//            return user;
-//        } else {
-//            throw new Exception("Email e/ou senha inválidos.");
-//        }
-        throw new Exception("Email e/ou senha inválidos.");
+        User user = userRepository.findByEmail(email);
+
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+            return user;
+        } else {
+            throw new Exception("Email e/ou senha inválidos.");
+        }
     }
 }

@@ -27,7 +27,6 @@ public class NoteService {
 
     public Note updateNote(Long id, Note note) {
         if (noteRepository.existsById(id)) {
-            note.setId_note(id);
             return noteRepository.save(note);
         }
         return null;
