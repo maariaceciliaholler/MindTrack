@@ -17,20 +17,22 @@ public class TrackListItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_track_list", nullable = false)
-    private Long idTrackList;
+    private Long id;
 
     @Column(name = "title_track_list", nullable = false)
-    private String titleTrackList;
+    private String title;
 
     @Column(name = "date_track_list", nullable = false)
-    private Date dateTrackList;
+    private Date date;
 
     @OneToMany(mappedBy = "trackListItem")
-    private List<ListItem> itemsTrackList;
+    private List<ListItem> items;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_id_user", nullable = false)
-    private User user;
+    @Column(name = "status_track_list", nullable = false)
+    private String status;
+
+    @Column(name = "fk_id_user")
+    private Long userId;
 }
 
 

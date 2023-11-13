@@ -15,8 +15,10 @@ const Header = styled(AppBar)`
 const Heading = styled(Typography)`
   color: #5f6368;
   font-size: 24px;
-  margin-left: 25px;
-  flex-grow: 1; /* Isso faz com que o Heading ocupe o espaço restante no Toolbar */
+  flex-grow: 1; /* This makes Heading occupy the remaining space in the Toolbar */
+  display: flex;
+  align-items: center; /* Vertically center-align the content */
+  margin-left: 570px; /* Adjust the margin for better spacing */
 `;
 
 const HeaderBar = ({ open, handleDrawer }) => {

@@ -13,16 +13,12 @@ import java.util.Optional;
 public class NoteService {
     private final NoteRepository noteRepository;
 
-    public List<Note> getAllNotes() {
-        return noteRepository.findAll();
-    }
-
-    public Optional<Note> getNoteById(Long id) {
-        return noteRepository.findById(id);
-    }
-
     public Note createNote(Note note) {
         return noteRepository.save(note);
+    }
+
+    public void deleteNote(Long id) {
+        noteRepository.deleteById(id);
     }
 
     public Note updateNote(Long id, Note note) {
@@ -32,11 +28,27 @@ public class NoteService {
         return null;
     }
 
-    public void deleteNote(Long id) {
-        noteRepository.deleteById(id);
+    public Note updateNoteStatus(Note note) {
+        if (noteRepository.existsById(note.getId())) {
+            return noteRepository.save(note);
+        }
+        return null;
     }
+
+    public Note updateNoteContent(Note note) {
+        if (noteRepository.existsById(note.getId())) {
+            return noteRepository.save(note);
+        }
+        return null;
+    }
+
+    public Optional<Note> getNoteById(Long id) {
+        return noteRepository.findById(id);
+    }
+
 
     public List<Note> getAllNotesForUser(Long userId) {
         return noteRepository.getUserNotes(userId);
     }
+
 }

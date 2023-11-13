@@ -16,15 +16,17 @@ public class Reminder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_reminder", nullable = false)
-    private Long idReminder;
+    private Long id;
 
     @Column(name = "date_reminder", nullable = false)
-    private Date dateReminder;
+    private Date date;
 
     @Column(name = "content_reminder", nullable = false)
-    private String contentReminder;
+    private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_id_user", nullable = false)
-    private User user;
+    @Column(name = "status_reminder", nullable = false)
+    private String status;
+
+    @Column(name = "fk_id_user")
+    private Long userId;
 }

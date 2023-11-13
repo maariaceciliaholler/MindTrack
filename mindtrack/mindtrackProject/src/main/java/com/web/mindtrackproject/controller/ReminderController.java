@@ -16,10 +16,16 @@ import java.util.Optional;
 public class ReminderController {
     private final ReminderService reminderService;
 
-    @GetMapping
-    public ResponseEntity<List<Reminder>> getAllReminders() {
-        List<Reminder> reminders = reminderService.getAllReminders();
-        return ResponseEntity.ok(reminders);
+    @PostMapping
+    public ResponseEntity<Reminder> createReminder(@RequestBody Reminder reminder) {
+        Reminder createdReminder = reminderService.createReminder(reminder);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdReminder);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteReminder(@PathVariable Long id) {
+        reminderService.deleteReminder(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
@@ -28,10 +34,44 @@ public class ReminderController {
         return reminder.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<Reminder> createReminder(@RequestBody Reminder reminder) {
-        Reminder createdReminder = reminderService.createReminder(reminder);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdReminder);
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Reminder>> getAllRemindersForUser(@PathVariable Long userId) {
+        List<Reminder> userNotes = reminderService.getAllRemindersForUser(userId);
+        return ResponseEntity.status(200).body(userNotes);
+    }
+
+    @PutMapping("/status/{id}")
+    public ResponseEntity<Reminder> updateReminderStatus(
+            @PathVariable Long id,
+            @RequestParam("status") String status
+    ) {
+        Optional<Reminder> optionalReminder = reminderService.getReminderById(id);
+
+        if (optionalReminder.isPresent()) {
+            Reminder reminder = optionalReminder.get();
+            reminder.setStatus(status);
+            Reminder updatedReminder = reminderService.updateReminderStatus(reminder);
+            return ResponseEntity.ok(updatedReminder);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/content/{id}")
+    public ResponseEntity<Reminder> updateReminderContent(
+            @PathVariable Long id,
+            @RequestParam("content") String content
+    ) {
+        Optional<Reminder> optionalReminder = reminderService.getReminderById(id);
+
+        if (optionalReminder.isPresent()) {
+            Reminder reminder = optionalReminder.get();
+            reminder.setContent(content);
+            Reminder updatedReminder = reminderService.updateReminderContent(reminder);
+            return ResponseEntity.ok(updatedReminder);
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
@@ -41,11 +81,5 @@ public class ReminderController {
             return ResponseEntity.ok(updatedReminder);
         }
         return ResponseEntity.notFound().build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReminder(@PathVariable Long id) {
-        reminderService.deleteReminder(id);
-        return ResponseEntity.noContent().build();
     }
 }

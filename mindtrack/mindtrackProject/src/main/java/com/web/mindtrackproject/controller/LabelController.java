@@ -1,6 +1,7 @@
 package com.web.mindtrackproject.controller;
 
 import com.web.mindtrackproject.entity.Label;
+import com.web.mindtrackproject.entity.Note;
 import com.web.mindtrackproject.service.LabelService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,10 +17,16 @@ import java.util.Optional;
 public class LabelController {
     private final LabelService labelService;
 
-    @GetMapping
-    public ResponseEntity<List<Label>> getAllLabels() {
-        List<Label> labels = labelService.getAllLabels();
-        return ResponseEntity.ok(labels);
+    @PostMapping
+    public ResponseEntity<Label> createLabel(@RequestBody Label label) {
+        Label createdLabel = labelService.createLabel(label);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdLabel);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteLabel(@PathVariable Long id) {
+        labelService.deleteLabel(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
@@ -28,10 +35,44 @@ public class LabelController {
         return label.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<Label> createLabel(@RequestBody Label label) {
-        Label createdLabel = labelService.createLabel(label);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdLabel);
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Label>> getAllLabelsForUser(@PathVariable Long userId) {
+        List<Label> userNotes = labelService.getAllLabelsForUser(userId);
+        return ResponseEntity.status(200).body(userNotes);
+    }
+
+    @PutMapping("/status/{id}")
+    public ResponseEntity<Label> updateLabelStatus(
+            @PathVariable Long id,
+            @RequestParam("status") String status
+    ) {
+        Optional<Label> optionalLabel = labelService.getLabelById(id);
+
+        if (optionalLabel.isPresent()) {
+            Label label = optionalLabel.get();
+            label.setStatus(status);
+            Label updatedLabel = labelService.updateLabelStatus(label);
+            return ResponseEntity.ok(updatedLabel);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/name/{id}")
+    public ResponseEntity<Label> updateLabelContent(
+            @PathVariable Long id,
+            @RequestParam("name") String name
+    ) {
+        Optional<Label> optionalLabel = labelService.getLabelById(id);
+
+        if (optionalLabel.isPresent()) {
+            Label label = optionalLabel.get();
+            label.setName(name);
+            Label updatedLabel = labelService.updateLabelName(label);
+            return ResponseEntity.ok(updatedLabel);
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
@@ -41,11 +82,5 @@ public class LabelController {
             return ResponseEntity.ok(updatedLabel);
         }
         return ResponseEntity.notFound().build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteLabel(@PathVariable Long id) {
-        labelService.deleteLabel(id);
-        return ResponseEntity.noContent().build();
     }
 }

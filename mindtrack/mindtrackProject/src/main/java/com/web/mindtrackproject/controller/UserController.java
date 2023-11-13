@@ -36,12 +36,6 @@ public class UserController {
         return ResponseEntity.status(200).body(createdUser);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-        return ResponseEntity.noContent().build();
-    }
-
     @PostMapping("/login")
     public ResponseEntity<User> loginUser(@RequestBody User user) throws Exception {
         try {

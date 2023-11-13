@@ -6,12 +6,16 @@ import AppRouter from "./router/app.router.tsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
+import { Provider } from "react-redux";
+import store from "../src/utils/userStore.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ToastContainer />
-    <ChakraProvider>
-      <RouterProvider router={AppRouter} />
-    </ChakraProvider>
+    <Provider store={store}>
+      <ToastContainer />
+      <ChakraProvider>
+        <RouterProvider router={AppRouter} />
+      </ChakraProvider>
+    </Provider>
   </React.StrictMode>
 );

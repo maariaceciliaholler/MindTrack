@@ -13,10 +13,10 @@ public class ListItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_item", nullable = false)
-    private Long idItem;
+    private Long id;
 
     @Column(name = "name_item", nullable = false)
-    private String nameItem;
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "fk_id_track_list_item", nullable = false)

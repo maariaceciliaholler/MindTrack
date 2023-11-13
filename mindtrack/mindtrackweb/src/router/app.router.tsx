@@ -2,8 +2,11 @@ import RegisterPage from "../features/user/auth/register/register.page";
 import LoginPage from "../features/user/auth/login/login.page";
 import HomePage from "../features/user/home.page"
 import { createBrowserRouter } from 'react-router-dom';
-import NotePage from "../features/note/create.note.page";
 import React from "react";
+import NotePage from "../features/user/note/note.page";
+import LabelPage from "../features/user/label/label.page";
+import ReminderPage from "../features/user/reminder/reminder.page";
+import TrashPage from "../features/user/trash/trash.page";
 
 
 const BASE_ROUTES = [
@@ -20,9 +23,28 @@ const BASE_ROUTES = [
         element: <HomePage />,
     },
     {
-        path: '/notes',
+        path: '/note/:userId',
         element: <NotePage />,
     }
+    ,
+    {
+        path: '/label/:userId',
+        element: <LabelPage />,
+    },
+    {
+        path: '/reminder/:userId',
+        element: <ReminderPage />,
+    }
+    ,
+    {
+        path: '/trash/:userId',
+        element: <TrashPage />,
+    }
+    // ,
+    // {
+    //     path: '/tracklist/:userId',
+    //     element: <TrackListPage />,
+    // }
 ];
 
 const AppRouter = createBrowserRouter([...BASE_ROUTES]);

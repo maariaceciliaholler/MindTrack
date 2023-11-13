@@ -16,19 +16,21 @@ public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_note", nullable = false)
-    private Long idNote;
+    private Long id;
 
     @Column(name = "title_note", nullable = false)
-    private String titleNote;
+    private String title;
 
     @Column(name = "content_note", nullable = false)
-    private String contentNote;
+    private String content;
 
     @Column(name = "date_note", nullable = false)
-    private Date dateNote;
+    private Date date;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_id_user", nullable = false)
-    private User user;
+    @Column(name = "status_note", nullable = false)
+    private String status;
+
+    @Column(name = "fk_id_user")
+    private Long userId;
 }
 

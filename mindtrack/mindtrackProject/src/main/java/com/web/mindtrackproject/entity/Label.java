@@ -14,13 +14,15 @@ public class Label {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_label", nullable = false)
-    private Long idLabel;
+    private Long id;
 
     @Column(name = "name_label", nullable = false)
-    private String nameLabel;
+    private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_id_user", nullable = false)
-    private User user;
+    @Column(name = "status_label", nullable = false)
+    private String status;
+
+    @Column(name = "fk_id_user")
+    private Long userId;
 }
 

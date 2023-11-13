@@ -14,38 +14,5 @@ import java.util.Optional;
 @RequestMapping("/api/listItem")
 @AllArgsConstructor
 public class ListItemController {
-    private final ListItemService listItemService;
-
-    @GetMapping
-    public ResponseEntity<List<ListItem>> getAllListItems() {
-        List<ListItem> listItems = listItemService.getAllListItems();
-        return ResponseEntity.ok(listItems);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<ListItem> getListItemById(@PathVariable Long id) {
-        Optional<ListItem> listItem = listItemService.getListItemById(id);
-        return listItem.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @PostMapping
-    public ResponseEntity<ListItem> createListItem(@RequestBody ListItem listItem) {
-        ListItem createdListItem = listItemService.createListItem(listItem);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdListItem);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<ListItem> updateListItem(@PathVariable Long id, @RequestBody ListItem listItem) {
-        ListItem updatedListItem = listItemService.updateListItem(id, listItem);
-        if (updatedListItem != null) {
-            return ResponseEntity.ok(updatedListItem);
-        }
-        return ResponseEntity.notFound().build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteListItem(@PathVariable Long id) {
-        listItemService.deleteListItem(id);
-        return ResponseEntity.noContent().build();
-    }
+    //TODO
 }

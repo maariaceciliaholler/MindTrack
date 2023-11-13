@@ -53,7 +53,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-function SwipeDrawer() {
+function SwipeDrawer({ userId, setUserId }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
 
@@ -66,7 +66,7 @@ function SwipeDrawer() {
       <HeaderBar open={open} handleDrawer={handleDrawer} />
       <Drawer variant="permanent" open={open}>
         <DrawerHeader></DrawerHeader>
-        <NavList />
+        <NavList userId={userId} setUserId={setUserId} />
       </Drawer>
     </Box>
   );

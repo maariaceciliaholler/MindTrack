@@ -16,10 +16,16 @@ import java.util.Optional;
 public class NoteController {
     private final NoteService noteService;
 
-    @GetMapping
-    public ResponseEntity<List<Note>> getAllNotes() {
-        List<Note> notes = noteService.getAllNotes();
-        return ResponseEntity.ok(notes);
+    @PostMapping
+    public ResponseEntity<Note> createNote(@RequestBody Note note) {
+        Note createdNote = noteService.createNote(note);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdNote);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteNote(@PathVariable Long id) {
+        noteService.deleteNote(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
@@ -28,10 +34,44 @@ public class NoteController {
         return note.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<Note> createNote(@RequestBody Note note) {
-        Note createdNote = noteService.createNote(note);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdNote);
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Note>> getAllNotesForUser(@PathVariable Long userId) {
+        List<Note> userNotes = noteService.getAllNotesForUser(userId);
+        return ResponseEntity.status(200).body(userNotes);
+    }
+
+    @PutMapping("/status/{id}")
+    public ResponseEntity<Note> updateNoteStatus(
+            @PathVariable Long id,
+            @RequestParam("status") String status
+    ) {
+        Optional<Note> optionalNote = noteService.getNoteById(id);
+
+        if (optionalNote.isPresent()) {
+            Note note = optionalNote.get();
+            note.setStatus(status);
+            Note updatedNote = noteService.updateNoteStatus(note);
+            return ResponseEntity.ok(updatedNote);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/content/{id}")
+    public ResponseEntity<Note> updateNoteContent(
+            @PathVariable Long id,
+            @RequestParam("content") String content
+    ) {
+        Optional<Note> optionalNote = noteService.getNoteById(id);
+
+        if (optionalNote.isPresent()) {
+            Note note = optionalNote.get();
+            note.setContent(content);
+            Note updatedNote = noteService.updateNoteContent(note);
+            return ResponseEntity.ok(updatedNote);
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
@@ -43,15 +83,4 @@ public class NoteController {
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteNote(@PathVariable Long id) {
-        noteService.deleteNote(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Note>> getAllNotesForUser(@PathVariable Long userId) {
-        List<Note> userNotes = noteService.getAllNotesForUser(userId);
-        return ResponseEntity.ok(userNotes);
-    }
 }

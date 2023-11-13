@@ -11,28 +11,5 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class ListItemService {
-    private final ListItemRepository listItemRepository;
-
-    public List<ListItem> getAllListItems() {
-        return listItemRepository.findAll();
-    }
-
-    public Optional<ListItem> getListItemById(Long id) {
-        return listItemRepository.findById(id);
-    }
-
-    public ListItem createListItem(ListItem listItem) {
-        return listItemRepository.save(listItem);
-    }
-
-    public ListItem updateListItem(Long id, ListItem listItem) {
-        if (listItemRepository.existsById(id)) {
-            return listItemRepository.save(listItem);
-        }
-        return null;
-    }
-
-    public void deleteListItem(Long id) {
-        listItemRepository.deleteById(id);
-    }
+    //TODO
 }
