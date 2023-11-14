@@ -15,12 +15,12 @@ Este é um projeto de um sistema de gerenciamento de tarefas e notas, desenvolvi
 | RF003| O sistema deve manter notas.                             | 1.0    | Em Andamento |
 | RF004| O sistema deve manter lembrete.                          | 1.0    | Finalizado |
 | RF005| O sistema deve manter etiqueta.                          | 1.0    | Finalizado |
-| RF006| O sistema deve permitir a exclusão permatente de uma anotação.    | 1.0    | Em Andamento |
+| RF006| O sistema deve permitir a exclusão permatente de uma anotação.    | 1.0    | Finalizado |
 | RF007| O sistema deve permitir filtrar as anotações por data de criação. | 1.0    | Em Andamento |
 | RF008| O sistema deve permitir filtrar as anotações por título. | 1.0    | Em Andamento |
 | RF009| O sistema deve permitir selecionar a cor de fundo da anotação. | 1.0    | Em Andamento |
 | RF010| O sistema deve permitir acessar as anotações excluídas.  | 1.0    | Finalizado |
-| RF011| O sistema deve permitir que a nota excluída seja restaurada. | 1.0    | Em Andamento |
+| RF011| O sistema deve permitir que a nota excluída seja restaurada. | 1.0    | Finalizado |
 
 
 ## Requisitos Não Funcionais
