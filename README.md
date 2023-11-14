@@ -8,19 +8,20 @@ Este é um projeto de um sistema de gerenciamento de tarefas e notas, desenvolvi
 
 ## Requisitos Funcionais
 
-| ID | Descrição | Versão |
-|----|-----------|--------|
-| RF001 | O sistema deve manter usuários. | 1.0 |
-| RF002 | O sistema deve manter lista de tarefas. | 1.0 |
-| RF003 | O sistema deve manter notas. | 1.0 |
-| RF004 | O sistema deve manter lembrete. | 1.0 |
-| RF005 | O sistema deve manter etiqueta. | 1.0 |
-| RF006 | O sistema deve permitir filtrar por tipo de anotação. | 1.0 |
-| RF007 | O sistema deve permitir filtrar as anotações por data de criação. | 1.0 |
-| RF008 | O sistema deve permitir filtrar as anotações por título. | 1.0 |
-| RF009 | O sistema deve permitir selecionar a cor de fundo da anotação. | 1.0 |
-| RF010 | O sistema deve permitir acessar as anotações excluídas. | 1.0 |
-| RF011 | O sistema deve permitir que a nota excluída seja restaurada. | 1.0 |
+| ID   | Descrição                                                | Versão | Status       |
+|------|----------------------------------------------------------|--------|--------------|
+| RF001| O sistema deve manter usuários.                          | 1.0    | Finalizado |
+| RF002| O sistema deve manter lista de tarefas.                  | 1.0    | Em Andamento |
+| RF003| O sistema deve manter notas.                             | 1.0    | Em Andamento |
+| RF004| O sistema deve manter lembrete.                          | 1.0    | Finalizado |
+| RF005| O sistema deve manter etiqueta.                          | 1.0    | Finalizado |
+| RF006| O sistema deve permitir filtrar por tipo de anotação.    | 1.0    | Em Andamento |
+| RF007| O sistema deve permitir filtrar as anotações por data de criação. | 1.0    | Em Andamento |
+| RF008| O sistema deve permitir filtrar as anotações por título. | 1.0    | Em Andamento |
+| RF009| O sistema deve permitir selecionar a cor de fundo da anotação. | 1.0    | Em Andamento |
+| RF010| O sistema deve permitir acessar as anotações excluídas.  | 1.0    | Finalizado |
+| RF011| O sistema deve permitir que a nota excluída seja restaurada. | 1.0    | Em Andamento |
+
 
 ## Requisitos Não Funcionais
 
