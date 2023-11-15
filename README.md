@@ -11,7 +11,7 @@ Este é um projeto de um sistema de gerenciamento de tarefas e notas, desenvolvi
 | ID   | Descrição                                                | Versão | Status       |
 |------|----------------------------------------------------------|--------|--------------|
 | RF001| O sistema deve manter usuários.                          | 1.0    | Finalizado |
-| RF002| O sistema deve manter lista de tarefas.                  | 1.0    | Em Andamento |
+| RF002| O sistema deve manter lista de tarefas.                  | 1.0    | Finalizado |
 | RF003| O sistema deve manter notas.                             | 1.0    | Finalizado |
 | RF004| O sistema deve manter lembrete.                          | 1.0    | Finalizado |
 | RF005| O sistema deve manter etiqueta.                          | 1.0    | Finalizado |
