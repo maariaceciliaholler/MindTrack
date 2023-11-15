@@ -83,7 +83,7 @@ function Login() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "primary.main", width: "50px", height: "50px", marginTop: "-60px" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">

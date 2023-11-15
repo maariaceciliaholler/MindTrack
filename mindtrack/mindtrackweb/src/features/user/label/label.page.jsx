@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { Box, TextField, Button, Typography } from "@mui/material";
-import { FiEdit3, FiTrash2 } from "react-icons/fi";
+import { FiEdit3, FiTrash2, FiDroplet } from "react-icons/fi";
 import SwipeDrawer from "../../../components/baselayout/swipe.drawer";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import LabelEditModal from "../../../components/modal/label-edit.modal";
 
 const theme = createTheme();
 
@@ -12,6 +13,8 @@ function LabelPage() {
   const [labels, setLabels] = useState([]);
   const [newLabel, setNewLabel] = useState("");
   const { userId } = useParams();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editinglabelId, setEditinglabelId] = useState(null);
 
   useEffect(() => {
     fetchLabels();
@@ -122,37 +125,14 @@ function LabelPage() {
     }
   }
 
-  async function handleEditlabel(labelId, newName) {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/api/label/name/${labelId}?name=${newName}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+  const handleOpenModal = (labelId) => {
+    setEditinglabelId(labelId);
+    setIsModalOpen(true, labelId);
+  };
 
-      if (response.ok) {
-        toast.success("Etiqueta editada com sucesso!", {
-          position: "bottom-right",
-        });
-        window.location.reload();
-      } else {
-        toast.error("Ocorreu um erro ao editar a Etiqueta, tente novamente!", {
-          position: "bottom-right",
-        });
-      }
-    } catch (error) {
-      toast.error(
-        "Ocorreu um erro ao editar a Etiqueta, tente novamente!" + error,
-        {
-          position: "bottom-right",
-        }
-      );
-    }
-  }
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -183,7 +163,7 @@ function LabelPage() {
         <Button variant="contained" onClick={handleAddLabel}>
           Adicionar
         </Button>
-        <Box sx={{ mt: 3, width: "100%", maxWidth: 400 }}>
+        <Box sx={{ mt: 3, width: "100%", maxWidth: 400, maxHeight: "0vh" }}>
           {labels.map((label) => (
             <Box
               key={label.id}
@@ -196,21 +176,23 @@ function LabelPage() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
+                backgroundColor: "white",
               }}
             >
               <Typography>{label.name}</Typography>
               <Box>
+                <Button onClick={() => handleOpenModal(label.id)}>
+                  <FiEdit3 />
+                </Button>
                 <Button onClick={() => handleDeletelabel(label.id)}>
                   <FiTrash2 />
                 </Button>
-                <Button
-                  onClick={() =>
-                    handleEditlabel(label.id, prompt("Novo conteúdo:"))
-                  }
-                >
-                  <FiEdit3 />
-                </Button>
               </Box>
+              <LabelEditModal
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+                labelId={editinglabelId}
+              />
             </Box>
           ))}
         </Box>

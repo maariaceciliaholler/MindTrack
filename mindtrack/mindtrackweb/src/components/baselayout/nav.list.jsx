@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { List, ListItem, ListItemIcon, ListItemText, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import {
   LightbulbOutlined as Lightbulb,
   AccessAlarmOutlined as Reminder,
   PlaylistAddCheckOutlined as PlaylistAddCheck,
   LocalOfferOutlined as LocalOffer,
   DeleteOutlineOutlined as Delete,
+  HouseOutlined as House,
 } from "@mui/icons-material";
 import { connect } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
@@ -16,6 +18,15 @@ const obterUserIdDaRota = (pathname) => {
   const match = pathname.match(/\/user\/(\d+)/);
   return match ? match[1] : null;
 };
+
+const Heading = styled(Typography)`
+  color: #5f6368;
+  font-size: 24px;
+  flex-grow: 1; /* This makes Heading occupy the remaining space in the Toolbar */
+  display: flex;
+  align-items: center; /* Vertically center-align the content */
+  margin-left: 570px; /* Adjust the margin for better spacing */
+`;
 
 const NavList = ({ userId, setUserId }) => {
   //CONTINUE
@@ -33,21 +44,22 @@ const NavList = ({ userId, setUserId }) => {
   // }, [location.pathname, userId, setUserId]);
 
   const navList = [
-    { id: 1, name: "Notas", icon: <Lightbulb />, route: `/note/${userId}` },
+    { id: 1, name: "Home", icon: <House />, route: `/home/${userId}` },
+    { id: 2, name: "Notas", icon: <Lightbulb />, route: `/note/${userId}` },
     {
-      id: 2,
+      id: 3,
       name: "Lembretes",
       icon: <Reminder />,
       route: `/reminder/${userId}`,
     },
     {
-      id: 3,
+      id: 4,
       name: "Listas de Tarefas",
       icon: <PlaylistAddCheck />,
       route: `/tracklist/${userId}`,
     },
     {
-      id: 4,
+      id: 5,
       name: "Etiquetas",
       icon: <LocalOffer />,
       route: `/label/${userId}`,

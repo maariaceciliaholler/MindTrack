@@ -71,7 +71,7 @@ function Login() {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: "primary.main", width: "50px", height: "50px", marginTop: "-50px"}}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -81,7 +81,7 @@ function Login() {
             component="form"
             onSubmit={handleSubmit}
             noValidate
-            sx={{ mt: 1 }}
+            sx={{ mt: 1, backgroundColor: "white", padding: "20px", borderRadius: "10px",}}
           >
             <TextField
               margin="normal"

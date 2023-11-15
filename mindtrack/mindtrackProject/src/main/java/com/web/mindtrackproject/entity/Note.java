@@ -18,8 +18,8 @@ public class Note {
     @Column(name = "id_note", nullable = false)
     private Long id;
 
-    @Column(name = "title_note", nullable = false)
-    private String title;
+    @Column(name = "color_note", nullable = false)
+    private String color;
 
     @Column(name = "content_note", nullable = false)
     private String content;

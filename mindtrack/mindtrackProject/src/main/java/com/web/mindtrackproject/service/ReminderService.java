@@ -4,6 +4,7 @@ import com.web.mindtrackproject.entity.Reminder;
 import com.web.mindtrackproject.repository.ReminderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import java.time.LocalDate;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,5 +49,9 @@ public class ReminderService {
 
     public List<Reminder> getAllRemindersForUser(Long userId) {
         return reminderRepository.getUserReminders(userId);
+    }
+
+    public List<Reminder> getAllRemindersByDate(LocalDate date) {
+        return reminderRepository.getRemindersByDate(date);
     }
 }

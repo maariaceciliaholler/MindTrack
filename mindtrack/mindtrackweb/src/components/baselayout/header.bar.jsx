@@ -49,8 +49,8 @@ const HeaderBar = ({ open, handleDrawer }) => {
         >
           <Menu />
         </IconButton>
-        <img src={logo} alt="logo" style={{ width: 30 }} />
-        <Heading>MindTrack</Heading>
+        <img src={logo} alt="logo" style={{ width: 35 }} />
+        <Heading style={{ color: "black", fontWeight: "bold", fontSize: "2rem", marginLeft: "500px" }}>MindTrack</Heading>
         <IconButton
           color="primary"
           edge="end"

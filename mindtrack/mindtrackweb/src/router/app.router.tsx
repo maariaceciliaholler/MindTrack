@@ -7,6 +7,7 @@ import NotePage from "../features/user/note/note.page";
 import LabelPage from "../features/user/label/label.page";
 import ReminderPage from "../features/user/reminder/reminder.page";
 import TrashPage from "../features/user/trash/trash.page";
+import TracklistPage from "../features/user/tracklist/tracklist.page";
 
 
 const BASE_ROUTES = [
@@ -40,11 +41,11 @@ const BASE_ROUTES = [
         path: '/trash/:userId',
         element: <TrashPage />,
     }
-    // ,
-    // {
-    //     path: '/tracklist/:userId',
-    //     element: <TrackListPage />,
-    // }
+    ,
+    {
+        path: '/tracklist/:userId',
+        element: <TracklistPage />,
+    }
 ];
 
 const AppRouter = createBrowserRouter([...BASE_ROUTES]);

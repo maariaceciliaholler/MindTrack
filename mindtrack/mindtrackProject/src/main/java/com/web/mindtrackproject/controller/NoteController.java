@@ -40,6 +40,12 @@ public class NoteController {
         return ResponseEntity.status(200).body(userNotes);
     }
 
+    @GetMapping("/content/{content}")
+    public ResponseEntity<List<Note>> getNotesByContent(@PathVariable String content) {
+        List<Note> notes = noteService.getNotesByContent(content);
+        return ResponseEntity.status(200).body(notes);
+    }
+
     @PutMapping("/status/{id}")
     public ResponseEntity<Note> updateNoteStatus(
             @PathVariable Long id,
@@ -52,6 +58,23 @@ public class NoteController {
             note.setStatus(status);
             Note updatedNote = noteService.updateNoteStatus(note);
             return ResponseEntity.ok(updatedNote);
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/color/{id}")
+    public ResponseEntity<Note> updateNoteColor(
+            @PathVariable Long id,
+            @RequestParam("color") String color
+    ) {
+        Optional<Note> optionalNote = noteService.getNoteById(id);
+        System.out.println(color);
+        if (optionalNote.isPresent()) {
+            Note note = optionalNote.get();
+            note.setColor(color);
+            Note updatedColor = noteService.updateNoteColor(note);
+            return ResponseEntity.ok(updatedColor);
         }
 
         return ResponseEntity.notFound().build();

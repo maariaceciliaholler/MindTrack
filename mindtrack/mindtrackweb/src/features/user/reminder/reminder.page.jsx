@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { Box, TextField, Button, Typography } from "@mui/material";
-import { FiEdit3, FiTrash2 } from "react-icons/fi";
+import { FiEdit3, FiTrash2, FiDroplet, FiSearch } from "react-icons/fi";
 import SwipeDrawer from "../../../components/baselayout/swipe.drawer";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import EventIcon from "@mui/icons-material/Event";
+import ReminderEditModal from "../../../components/modal/reminder-edit.modal";
 
 const theme = createTheme();
 
@@ -12,6 +16,17 @@ function ReminderPage() {
   const [reminders, setReminders] = useState([]);
   const [newReminder, setNewReminder] = useState("");
   const { userId } = useParams();
+  const [filterText, setFilterText] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingReminderId, setEditingReminderId] = useState(null);
+
+  const getFormattedDate = () => {
+    const currentDate = new Date();
+    const day = currentDate.getDate().toString().padStart(2, "0");
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+    const year = currentDate.getFullYear();
+    return `${year}-${month}-${day}`;
+  };
 
   useEffect(() => {
     fetchReminders();
@@ -124,37 +139,54 @@ function ReminderPage() {
     }
   }
 
-  async function handleEditReminder(reminderId, newContent) {
+  async function handleSearch(filterText) {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/reminder/content/${reminderId}?content=${newContent}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (response.ok) {
-        toast.success("Lembrete editado com sucesso!", {
+      if (!filterText) {
+        toast.error("Campo de busca não foi preenchido!", {
           position: "bottom-right",
         });
-        window.location.reload();
+        fetchReminders();
       } else {
-        toast.error("Ocorreu um erro ao editar o Lembrete, tente novamente!", {
-          position: "bottom-right",
-        });
+        const response = await fetch(
+          `http://localhost:8080/api/reminder/date/${filterText}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = await response.json();
+        if (response.ok && data.length > 0) {
+          setReminders(data);
+          toast.success("Notas encontradas com sucesso!", {
+            position: "bottom-right",
+          });
+        } else {
+          toast.error("Não foi possível encontrar a nota, tente novamente!", {
+            position: "bottom-right",
+          });
+        }
       }
     } catch (error) {
       toast.error(
-        "Ocorreu um erro ao editar o Lembrete, tente novamente!" + error,
+        "Ocorreu um erro ao buscar as notas, tente novamente!" + error,
         {
           position: "bottom-right",
         }
       );
     }
   }
+
+  const handleOpenModal = (reminderId) => {
+    console.log(reminderId);
+    setEditingReminderId(reminderId);
+    setIsModalOpen(true, reminderId);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -164,7 +196,51 @@ function ReminderPage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          height: "100vh",
+          marginLeft: "-45%",
+          height: "45vh",
+          textAlign: "center",
+        }}
+      >
+        <Box
+          sx={{
+            mb: 2,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <TextField
+            variant="outlined"
+            label="Buscar Lembretes Criados na Data"
+            value={filterText}
+            onChange={(e) => setFilterText(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={() => setFilterText(getFormattedDate())}>
+                    <EventIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            sx={{ width: "160%", margin: "0 auto" }}
+          />
+          <Button
+            variant="contained"
+            sx={{ ml: 1, width: "150px", height: "55px" }}
+            onClick={() => handleSearch(filterText)}
+          >
+            <FiSearch />
+          </Button>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "30vh",
           textAlign: "center",
         }}
       >
@@ -180,12 +256,23 @@ function ReminderPage() {
             label="Adicionar um Lembrete..."
             value={newReminder}
             onChange={(e) => setNewReminder(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={() => setNewReminder(getFormattedDate())}
+                  >
+                    <EventIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
         </Box>
         <Button variant="contained" onClick={handleAddReminder}>
           Adicionar
         </Button>
-        <Box sx={{ mt: 3, width: "100%", maxWidth: 400 }}>
+        <Box sx={{ mt: 3, width: "100%", maxWidth: 400, maxHeight: "0vh" }}>
           {reminders.map((reminder) => (
             <Box
               key={reminder.id}
@@ -198,21 +285,23 @@ function ReminderPage() {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
+                backgroundColor: "white",
               }}
             >
               <Typography>{reminder.content}</Typography>
               <Box>
+                <Button onClick={() => handleOpenModal(reminder.id)}>
+                  <FiEdit3 />
+                </Button>
                 <Button onClick={() => handleDeleteReminder(reminder.id)}>
                   <FiTrash2 />
                 </Button>
-                <Button
-                  onClick={() =>
-                    handleEditReminder(reminder.id, prompt("Novo conteúdo:"))
-                  }
-                >
-                  <FiEdit3 />
-                </Button>
               </Box>
+              <ReminderEditModal
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+                reminderId={editingReminderId}
+              />
             </Box>
           ))}
         </Box>

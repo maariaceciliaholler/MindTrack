@@ -35,6 +35,13 @@ public class NoteService {
         return null;
     }
 
+    public Note updateNoteColor(Note note) {
+        if (noteRepository.existsById(note.getId())) {
+            return noteRepository.save(note);
+        }
+        return null;
+    }
+
     public Note updateNoteContent(Note note) {
         if (noteRepository.existsById(note.getId())) {
             return noteRepository.save(note);
@@ -49,6 +56,10 @@ public class NoteService {
 
     public List<Note> getAllNotesForUser(Long userId) {
         return noteRepository.getUserNotes(userId);
+    }
+
+    public List<Note> getNotesByContent(String content) {
+        return noteRepository.getNotesByContent(content);
     }
 
 }

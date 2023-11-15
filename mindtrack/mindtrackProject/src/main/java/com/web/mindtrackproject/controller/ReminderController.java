@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.time.LocalDate;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +39,12 @@ public class ReminderController {
     public ResponseEntity<List<Reminder>> getAllRemindersForUser(@PathVariable Long userId) {
         List<Reminder> userNotes = reminderService.getAllRemindersForUser(userId);
         return ResponseEntity.status(200).body(userNotes);
+    }
+
+    @GetMapping("/date/{date}")
+    public ResponseEntity<List<Reminder>> getAllRemindersByDate(@PathVariable LocalDate date) {
+        List<Reminder> reminders = reminderService.getAllRemindersByDate(date);
+        return ResponseEntity.status(200).body(reminders);
     }
 
     @PutMapping("/status/{id}")

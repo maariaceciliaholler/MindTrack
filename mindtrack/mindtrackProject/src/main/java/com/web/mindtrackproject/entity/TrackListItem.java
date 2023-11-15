@@ -19,14 +19,14 @@ public class TrackListItem {
     @Column(name = "id_track_list", nullable = false)
     private Long id;
 
-    @Column(name = "title_track_list", nullable = false)
-    private String title;
+    @Column(name = "status_checkbox_track_list", nullable = false)
+    private boolean statusCheckbox;
+
+    @Column(name = "content_track_list", nullable = false)
+    private String content;
 
     @Column(name = "date_track_list", nullable = false)
     private Date date;
-
-    @OneToMany(mappedBy = "trackListItem")
-    private List<ListItem> items;
 
     @Column(name = "status_track_list", nullable = false)
     private String status;
