@@ -58,17 +58,22 @@ Este é um projeto de um sistema de gerenciamento de tarefas e notas, desenvolvi
 ## Instalação
 
 1. Pré-requisitos
-   a. Possuir Postgresql
-   b. Possuir Java
-   c. Possuir Javascript
-   d. Possuir IntelliJ
+    1.1 Possuir PostgreSQL  
+    1.2 Possuir Java  
+    1.3 Possuir Javascript  
+    1.4 Possuir IntelliJ
+
 2. Clone este repositório
-3. No intelliJ abra a pasta mindtrackProject
-   a. Clique em Run, assim o backend estará rodando
-4. No VSCode abra a pasta mindtrackweb
-   a. Rode o comando "npm install"
-   b. Rode o comando "npm run dev"
-5. Pronto, agora basta acessar pelo navegador o projeto.
+
+3. No IntelliJ, abra a pasta mindtrackProject  
+    3.1 Clique em Run; assim, o backend estará rodando
+
+4. No VSCode, abra a pasta mindtrackweb  
+    4.1 Rode o comando "npm install"  
+    4.2 Rode o comando "npm run dev"
+
+5. Pronto, agora basta acessar pelo navegador o projeto com o link do localhost: http://localhost:5173/login.
+
 
 ---
 Este projeto foi desenvolvido por Eduardo Schork, Luíza Nurnberg e Maria Cecilia Holler. 
