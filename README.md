@@ -21,6 +21,9 @@ Este é um projeto de um sistema de gerenciamento de tarefas e notas, desenvolvi
 | RF009| O sistema deve permitir selecionar a cor de fundo da anotação. | 1.0    | Finalizado |
 | RF010| O sistema deve permitir acessar as anotações excluídas.  | 1.0    | Finalizado |
 | RF011| O sistema deve permitir que a nota excluída seja restaurada. | 1.0    | Finalizado |
+| RF012| O sistema deve possuir página de 404. | 1.0    | Finalizado |
+| RF013| O sistema deve possuir página de home. | 1.0    | Finalizado |
+| RF014| O sistema deve possuir menu de navegação intuitiva. | 1.0    | Finalizado |
 
 
 ## Requisitos Não Funcionais
@@ -40,11 +43,17 @@ Este é um projeto de um sistema de gerenciamento de tarefas e notas, desenvolvi
 |----|-----------|--------|
 | RN001 | O cadastro de usuário deve conter nome, e-mail e senha. | 1.0 |
 | RN002 | Os usuários precisam realizar login para gerenciar suas anotações. | 1.0 |
-| RN003 | Lembretes devem ter data e conteúdo obrigatórios. | 1.0 |
-| RN004 | Os usuários só têm acesso às suas próprias anotações, listas e lembretes. | 1.0 |
-| RN005 | Ao restaurar uma nota excluída, ela retorna para a rotina de notas. | 1.0 |
-| RN006 | Os usuários podem adicionar, editar e excluir itens de tarefas em uma lista. | 1.0 |
-| RN007 | Os usuários devem fornecer informações de cadastro válidas. | 1.0 |
+| RN003 | Lembretes poderão ter apenas o conteúdo como também a data inserida. | 1.0 |
+| RN004 | Os usuários só terão acesso às suas próprias notas, etiquetas, listas e lembretes. | 1.0 |
+| RN005 | Ao excluir uma nota, será possível verificar ela na rotina de lixeira. | 1.0 |
+| RN006 | Ao restaurar uma nota excluída, ela retorna para a rotina de notas. | 1.0 |
+| RN007 | Ao excluir permanentemente uma nota excluída, ela sumirá da lixeira. | 1.0 |
+| RN008 | Será possível alterar a cor de fundo das Notas após criadas. | 1.0 |
+| RN009 | Lembretes, Listas de Tarefa e Etiquetas será possível apenas Adicionar, Editar e Excluir. | 1.0 |
+| RN010 | Lembretes, Listas de Tarefa e Etiquetas não serão listadas na lixeira ao realizar a exclusão. | 1.0 |
+| RN011 | Lembretes, Listas de Tarefa e Etiquetas serão sempre excluídas permanentemente. | 1.0 |
+| RN012 | Os usuários devem fornecer informações de cadastro válidas. | 1.0 |
+| RN013 | Ao informar qualquer rota inválida será apresentada a página de Not Found. | 1.0 |
 
 ## Instalação
 
